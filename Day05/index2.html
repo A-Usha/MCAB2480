@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/style.css" />
+    <script src="script.js"></script>
+   
+  <title>Student Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #f0f8ff, #dbe9ff);
+      margin: 0;
+      padding: 20px;
+    }
+
+    h2 {
+      color: #333;
+      text-align: center;
+    }
+
+    table {
+      border-collapse: collapse;
+      margin: auto;
+      width: 90%;
+      max-width: 1000px;
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    table, th, td {
+      border: 1px solid #aaa;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #444;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    input[type="text"], input[type="number"] {
+      width: 90%;
+      padding: 8px;
+      margin: 5px 0;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    form div {
+      margin-bottom: 10px;
+    }
+
+    .list {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <form onsubmit="event.preventDefault(); onFormSubmit();">
+    <h2>Enter Student Details</h2>
+    <table>
+      <tr>
+        <td>
+          <div>
+            <label for="facName">Name</label><br />
+            <input type="text" id="facName" placeholder="Enter the Student Name" />
+          </div>
+
+          <div>
+            <label for="facDep">College Name</label><br />
+            <input type="text" id="facDep" placeholder="Enter the College Name" />
+          </div>
+
+          <div>
+            <label for="facSub">Course</label><br />
+            <input type="text" id="facSub" placeholder="Enter the Course Name" />
+          </div>
+
+          <div>
+            <input type="submit" value="Submit" />
+          </div>
+        </td>
+
+        <td>
+          <table class="list" id="faclist">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>College Name</th>
+                <th>Course</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Data rows will appear here -->
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </form>
+
+</body>
+</html>

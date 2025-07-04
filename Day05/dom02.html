@@ -1,0 +1,29 @@
+<!doctype html>
+<html><!--<head> we've to write script using function a() </head>-->
+    <head>
+        <script>
+            function ab(){
+        const x=document.forms["frm1"];
+        let text="";
+        for(let i=0;i<x.length;i++){
+            text+=x.elements[i].value;
+
+        } 
+        /*alert(text);*/  
+        alert(text);
+        document.getElementById("demo").innerHTML=text;
+    }
+        </script></head>
+    <body>
+        <h2>JavaScript HTML DOM</h2>
+        <p>Finding HTML Elements Using <b>document.forms</b></p>
+        <form id="frm1" action="">
+            First Name:<input type="text" name="fname"><br>
+            Last Name:<input type="text" name="lname"><br><br>
+            <input type="submit" onclick="ab()"><!-- onclick=ab()-->
+        </form>
+        <p> These are the values of the each element in the form.</p>
+        <p id="demo"></p>
+    
+        </body>
+        </html>
