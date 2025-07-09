@@ -7,13 +7,13 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
     <title>
-        Build a Survey Form using HTML and CSS
+        Fac Feedback Form
     </title>
  
     <style>
   /* Styling the Body element i.e. Color,        Font, Alignment */
         body {
-            background-color: skyblue;
+            background-color:grey;
             font-family: Verdana;
             text-align: center;
         }
@@ -71,6 +71,8 @@
             margin-bottom: 20px;
         }
     </style>
+    
+
 </head>
   
 <body>
@@ -82,37 +84,28 @@
         <!-- Details -->
         <div class="form-control">
             <label for="name" id="label-name">
-                Student Name:
+                <b>Faculty Name:</b>
             </label>
  
             <!-- Input Type Text -->
             <input type="text"
                    id="name"
-                   placeholder="Enter your name" />
+                   placeholder="Enter faculty name" />
         </div>
   
-        <div class="form-control">
-            <label for="email" id="label-email">
-                Email
-            </label>
- 
-            <!-- Input Type Email-->
-            <input type="email"
-                   id="email"
-                   placeholder="Enter email" />
-        </div>
+    
   
         <div class="form-control">
             <label for="role" id="label-role">
-                Training Attended:
+                <b>Training Attended:</b>
             </label>
              
             <!-- Dropdown options -->
             <select name="role" id="role">
                 <option value="student">--Select Training--</option>
-                <option value="intern">Intern</option>
+                <option value="intern">Java Fullstack</option>
                 <option value="professional">
-                    Professional
+                    Python Fullstack
                 </option>
                 <option value="other">Other</option>
             </select>
@@ -121,56 +114,56 @@
   
         <div class="form-control">
             <label>
-                Overall Rating
-            </label><br>
+                <b>Overall Rating:</b>
+            </label><br><br>
  
             <!-- Input Type Radio Button -->
             <label for="recommed-1">
                 <input type="radio"
                        id="recommed-1"
-                       name="recommed">Yes</input><br>
+                       name="recommed">Excellent</input>
             </label>
             <label for="recommed-2">
                 <input type="radio"
                        id="recommed-2"
-                       name="recommed">No</input><br>
+                       name="recommed">Good</input><br>
             </label>
             <label for="recommed-3">
                 <input type="radio"
                        id="recommed-3"
-                       name="recommed">Maybe</input><br>
+                       name="recommed">Average</input>
+            </label>
+            <label for="recommed-4">
+                <input type="radio"
+                       id="recommed-4"
+                       name="recommed">poor</input><br>
             </label>
         </div>
   
         <div class="form-control">
-            <label>Languages and Frameworks known
+            <label><b>Topics Covered</b>
                 <small>(Check all that apply)</small><br>
             </label>
             <!-- Input Type Checkbox -->
             <label for="inp-3">
                 <input type="checkbox"
-                       name="inp">HTML</input></label><br>
+                       name="inp">Content Quality</input></label>
             <label for="inp-4">
                 <input type="checkbox"
-                       name="inp">Java</input></label><br>
+                       name="inp">Delivery</input></label><br>
             <label for="inp-5">
                 <input type="checkbox"
-                       name="inp">Python</input></label><br>
+                       name="inp">Interaction</input></label>
             <label for="inp-6">
                 <input type="checkbox"
-                       name="inp">JavaScript</input></label><br>
+                       name="inp">Relevance</input></label>
             
-            <label for="inp-7">
-                <input type="checkbox"
-                       name="inp">Django</input></label><br>
-            <label for="inp-8">
-                <input type="checkbox"
-                       name="inp">CSS</input></label><br>
+           
         </div>
   
         <div class="form-control">
             <label for="comment">
-                Any Feedback
+                <b>Any Feedback</b>
             </label>
  
             <!-- multi-line text input control -->
@@ -181,8 +174,38 @@
   
         <!-- Multi-line Text Input Control -->
         <button type="submit" value="submit">
-            Submit
+            Submit Feedback
         </button>
     </form>
+    <script>
+    document.getElementById("form").addEventListener("submit", function(e) {
+        e.preventDefault(); // prevent form from submitting
+
+        var name = document.getElementById("name").value;
+        var training = document.getElementById("role").value;
+
+        // Get selected radio button
+        var rating = document.querySelector('input[name="recommed"]:checked');
+        rating = rating ? rating.parentElement.innerText : "Not selected";
+
+        // Get checked checkboxes
+        var checkboxes = document.querySelectorAll('input[name="inp"]:checked');
+        var topics = [];
+        checkboxes.forEach(function(checkbox) {
+            topics.push(checkbox.parentElement.innerText);
+        });
+
+        var comment = document.getElementById("comment").value;
+
+        // Show alert with all the details
+        alert(
+            "Faculty Name: " + name + "\n" +
+            "Training Attended: " + training + "\n" +
+            "Overall Rating: " + rating + "\n" +
+            "Topics Covered: " + topics.join(", ") + "\n" +
+            "Feedback: " + comment
+        );
+    });
+</script>
 </body>
 </html>

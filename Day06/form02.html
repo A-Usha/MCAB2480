@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fac Feedback Form</title>
+  <style>
+    body {
+      background-color: grey;
+      font-family: Verdana;
+      text-align: center;
+    }
+
+    form {
+      background-color: #eee8e8;
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 30px 20px;
+      box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .form-control {
+      text-align: left;
+      margin-bottom: 25px;
+    }
+
+    .form-control label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .form-control input,
+    .form-control select,
+    .form-control textarea {
+      border: 1px solid #777;
+      border-radius: 2px;
+      font-family: inherit;
+      padding: 10px;
+      display: block;
+      width: 95%;
+    }
+
+    .form-control input[type="radio"],
+    .form-control input[type="checkbox"] {
+      display: inline-block;
+      width: auto;
+    }
+
+    button {
+      background-color: #28d66e;
+      border: 1px solid #777;
+      border-radius: 2px;
+      font-family: inherit;
+      font-size: 21px;
+      display: block;
+      width: 100%;
+      margin-top: 50px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Feedback Form</h1>
+
+  <form id="form">
+    <div class="form-control">
+      <label for="name"><b>Faculty Name:</b></label>
+      <input type="text" id="name" placeholder="Enter faculty name" />
+    </div>
+
+    <div class="form-control">
+      <label for="role"><b>Training Attended:</b></label>
+      <select name="role" id="role">
+        <option value="">--Select Training--</option>
+        <option value="Java Fullstack">Java Fullstack</option>
+        <option value="Python Fullstack">Python Fullstack</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <div class="form-control">
+      <label><b>Overall Rating:</b></label><br><br>
+      <label><input type="radio" name="recommed" value="Excellent"> Excellent</label>
+      <label><input type="radio" name="recommed" value="Good"> Good</label><br>
+      <label><input type="radio" name="recommed" value="Average"> Average</label>
+      <label><input type="radio" name="recommed" value="Poor"> Poor</label>
+    </div>
+
+    <div class="form-control">
+      <label><b>Topics Covered</b><small> (Check all that apply)</small></label><br>
+      <label><input type="checkbox" name="topics" value="Content Quality"> Content Quality</label>
+      <label><input type="checkbox" name="topics" value="Delivery"> Delivery</label><br>
+      <label><input type="checkbox" name="topics" value="Interaction"> Interaction</label>
+      <label><input type="checkbox" name="topics" value="Relevance"> Relevance</label>
+    </div>
+
+    <div class="form-control">
+      <label for="comment"><b>Any Feedback</b></label>
+      <textarea name="comment" id="comment" placeholder="Enter your comment"></textarea>
+    </div>
+
+    <button type="submit">Submit Feedback</button>
+  </form>
+
+  <script>
+    document.getElementById('form').addEventListener('submit', function (e) {
+      e.preventDefault(); // Prevent form from submitting normally
+
+      const name = document.getElementById('name').value;
+      const role = document.getElementById('role').value;
+
+      // Get selected radio
+      const rating = document.querySelector('input[name="recommed"]:checked')?.value || 'Not selected';
+
+      // Get selected checkboxes
+      const topicNodes = document.querySelectorAll('input[name="topics"]:checked');
+      const topics = Array.from(topicNodes).map(input => input.value);
+
+      const comment = document.getElementById('comment').value.trim();
+
+      alert(
+        "Faculty Name: " + name + "\n" +
+        "Training Attended: " + role + "\n" +
+        "Overall Rating: " + rating + "\n" +
+        "Topics Covered: " + (topics.length ? topics.join(", ") : "None") + "\n" +
+        "Feedback: " + comment
+      );
+    });
+  </script>
+</body>
+</html>
