@@ -1,0 +1,29 @@
+{% extends "master.html" %}
+{% block title %}Faculty List{% endblock %}
+
+{% block content %}
+    <h1>Faculty List</h1>
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Joining Date</th>
+            <th>Actions</th>
+        </tr>
+        {% for faculty in faculties %}
+        <tr>
+            <td>{{ faculty.id }}</td>
+            <td>{{ faculty.name }}</td>
+            <td>{{ faculty.department }}</td>
+            <td>{{ faculty.joining_date }}</td>
+            <td>
+                <a href="{% url 'faculty_update' faculty.id %}">Edit</a> |
+                <a href="{% url 'faculty_delete' faculty.id %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a href="{% url 'faculty_create' %}">Add New Faculty</a>
+{% endblock %}
