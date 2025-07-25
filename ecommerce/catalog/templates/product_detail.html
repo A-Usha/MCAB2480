@@ -10,6 +10,12 @@
     {% endif %}
     <p>{{ product.description }}</p>
     <p>Price: Rs{{ product.price }}</p>
-    <a href="/">Back to Products</a>
+    <form method="post" action="{% url 'add_to_cart' product.pk %}">
+        {% csrf_token %}
+        <button type="submit">Add to Cart</button>
+    </form>
+    <a href="/">Continue Shopping</a>
 </body>
 </html>
+
+

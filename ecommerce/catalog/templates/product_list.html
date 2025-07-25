@@ -9,14 +9,18 @@
 </head>
 <body>
     <h1>Products</h1>
+    <a href="{% url 'view_cart' %}">🛒 View Cart</a>
+    <hr>
     {% for product in products %}
         <div class="product">
             {% if product.image %}
                 <img src="{{ product.image.url }}" alt="{{ product.name }}">
             {% endif %}
             <h2><a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a></h2>
-            <p>${{ product.price }}</p>
+            <p>Price: Rs{{ product.price }}</p>
         </div>
     {% endfor %}
 </body>
 </html>
+
+
