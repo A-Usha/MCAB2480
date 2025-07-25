@@ -1,0 +1,113 @@
+import java.util.Scanner;
+import java.util.LinkedList;
+import java.util.Stack;
+import java.util.Queue;
+class GraphL
+{
+	int V;
+	private LinkedList<Integer>arr[];
+	GraphL(int node){
+		this.V=node;
+		arr=new LinkedList[node];
+		for(int a=0;a<V;a++){
+			arr[a]=new LinkedList<Integer>();
+		}
+}
+public void insert(int s,int d){
+	arr[s].add(d);
+	arr[d].add(s);
+}
+public void print(){
+	for(int i=0;i<V;i++){
+		System.out.println("Vertex"+ i +":"+arr[i]);
+	}
+}
+public void dfs(int s){
+	boolean[] visited=new boolean[V];
+	Stack<Integer> s1=new Stack<>();
+	s1.push(s);
+	System.out.println("DFS traversal");
+	while(!s1.isEmpty()){
+		int u=s1.pop();
+		if(!visited[u]){
+			visited[u]=true;
+			System.out.print(u+" ");
+			for(int v:arr[u]){
+				if(!visited[v]){
+					s1.push(v);
+				}
+			}
+		}
+	}
+	System.out.println();
+}
+public void bfs(int r){
+	boolean[] visited=new boolean[V];
+	Queue<Integer> q=new LinkedList<>();
+	visited[r]=true;
+	q.offer(r);
+	System.out.println("BFS traversal");
+	while(!q.isEmpty()){
+		int u1=q.poll();
+		System.out.print(u1+" ");
+		for(int v1:arr[u1]){
+			if(!visited[v1]){
+				visited[v1]=true;
+				q.offer(v1);
+			}
+		}
+	}
+	System.out.println();
+}
+public static void main(String args[]){
+	Scanner s=new Scanner(System.in);
+	System.out.print("Enter no of vertices");
+	int v=s.nextInt();
+	GraphL g=new GraphL(v);
+	int choice;
+	do{
+		System.out.println("\n---Graph Traversals---");
+		System.out.println("1.Insert Edge");
+		System.out.println("2.Print Graph");
+		System.out.println("3.DFS Traversal");
+		System.out.println("4.BFS Traversal");
+		System.out.println("5.Exit");
+		System.out.println("Enter your choice");
+		choice=s.nextInt();
+		switch(choice){
+			case 1:
+				System.out.print("Enter source vertex");
+			int l=s.nextInt();
+			System.out.print("Enter destination vertex");
+			int m=s.nextInt();
+			g.insert(l,m);
+			break;
+			case 2:
+				g.print();
+			break;
+			case 3:
+				System.out.print("Enter starting vertex for DFS");
+			int dfsStart=s.nextInt();
+			g.dfs(dfsStart);
+			break;
+			case 4:
+				System.out.print("Enter starting vertex for BFS");
+			int bfsStart=s.nextInt();
+			g.bfs(bfsStart);
+			break;
+			case 5:
+				System.out.print("Exiting program....");
+			break;
+			default:
+				System.out.print("Invalid choice");
+		}
+	}while(choice!=5);
+}
+}
+//C:\SEM2-0092\JAVA DS>javac GraphL.java
+//Note: GraphL.java uses unchecked or unsafe operations.
+//Note: Recompile with -Xlint:unchecked for details.
+
+//C:\SEM2-0092\JAVA DS>
+
+			

@@ -1,0 +1,43 @@
+import java.util.Random;
+
+public class GoBackN{
+    static final int TOTAL_PACKETS = 10;   // Total number of packets to send
+    static final int WINDOW_SIZE = 4;      // Size of the sliding window
+
+    public static void main(String[] args) {
+        int base = 0;   // Starting point of the window
+        Random random = new Random();  // To simulate random timeouts
+
+        while (base < TOTAL_PACKETS) {
+            int end = Math.min(base + WINDOW_SIZE, TOTAL_PACKETS);
+
+            // Sending packets in the current window
+            for (int i = base; i < end; i++) {
+                System.out.println("Sending packet:" + i);
+            }
+
+            // Simulate timeout at random packet in the window (to trigger retransmission)
+            int lostPacket = random.nextInt(WINDOW_SIZE);  // Randomly pick a packet in the window that "fails"
+            
+            // Simulate a timeout (simulate ACK loss or failure)
+            boolean timeoutOccurred = random.nextBoolean();
+            
+            if (timeoutOccurred) {
+                // Print timeout and retransmission info
+                System.out.println("Timeout occurred. Resending from packet:" + (base + lostPacket));
+                base = base + lostPacket;  // Go back to the lost packet and resend window from there
+            } else {
+                // No timeout, move window forward
+                base = end;  // Shift the window forward after successful transmission
+            }
+
+            // Optional small delay to simulate network behavior (makes output easier to follow)
+            try {
+                Thread.sleep(500);  // Simulate a brief network delay (500 ms)
+            } catch (InterruptedException ignored) {}
+        }
+
+        // Success message after all packets are acknowledged
+        System.out.println("All packets sent and acknowledged successfully.");
+    }
+}

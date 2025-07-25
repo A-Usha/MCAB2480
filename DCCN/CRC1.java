@@ -1,0 +1,80 @@
+import java.util.*;
+
+public class CRC1 {
+
+    // Method for XOR operation between two binary strings
+    public String XOR(String a, String b) {
+        String result = "";
+        int length = b.length();
+        for (int i = 0; i < length; i++) {
+            if (a.charAt(i) == b.charAt(i)) {
+                result += "0";
+            } else {
+                result += "1";
+            }
+        }
+        return result;
+    }
+
+    // Method for CRC division
+    public String CRC_Divide(String data, String polynomial) {
+        int m = polynomial.length();
+        int n = data.length();
+        String paddedData = data +"0".repeat(m-1);; // Append m-1 zeroes to the data
+        String remainder = paddedData.substring(0, m); // Get first m bits of the padded data
+
+        for (int i = m; i < n + m - 1; i++) {
+            if (remainder.charAt(0) == '1') {
+                remainder = XOR(remainder, polynomial) + paddedData.charAt(i);
+            } else {
+                remainder = XOR(remainder,"0".repeat(m))+ paddedData.charAt(i);
+            }
+        }
+
+        // Final XOR with the polynomial if necessary
+        if (remainder.charAt(0) == '1') {
+            remainder = XOR(remainder, polynomial);
+        }
+
+        // Return the remainder (CRC)
+        return remainder.substring(1, m); // Return the last (m-1) bits as CRC
+    }
+
+    // Method to calculate CRC
+    public String Calculate_CRC(String data, String polynomial) {
+        return CRC_Divide(data, polynomial); // Divide to get CRC
+    }
+
+    // Method to check if the received data is valid (no errors)
+    public boolean Check_CRC(String data, String polynomial) {
+        String remainder = CRC_Divide(data, polynomial); // Divide the received data by the polynomial
+        return remainder.equals("0".repeat(polynomial.length() - 1)); // Valid if remainder is all zeros
+    }
+
+    public static void main(String[] args) {
+        CRC crcCalculator = new CRC();
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter the data (binary):");
+        String data = scanner.nextLine(); // From the user
+
+        System.out.println("Enter the CRC polynomial (binary):");
+        String polynomial = scanner.nextLine(); // From the user
+
+        // Calculate the CRC for the given data and polynomial
+        String crc = crcCalculator.Calculate_CRC(data, polynomial);
+        System.out.println("CRC code: " + crc); // Display the CRC
+
+        // Calculate the final transmitted data (data + CRC)
+        String dataWithCRC = data + crc;
+
+        // Check if the received data is valid (no errors)
+        if (crcCalculator.Check_CRC(dataWithCRC, polynomial)) {
+            System.out.println("Data received correctly (no errors)");
+        } else {
+            System.out.println("Data received with error");
+        }
+
+        scanner.close();
+    }
+} 

@@ -1,0 +1,30 @@
+import java.util.Scanner;
+
+class parityCheck {
+    public static void main(String[] args) {
+        // Create a scanner object to read input
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a binary string number: ");
+        String binaryString = sc.nextLine();
+        
+        int countOnes = 0;
+        for (int i = 0; i < binaryString.length(); i++) {
+            if (binaryString.charAt(i) == '1') {
+                countOnes++;
+            }
+        }
+
+        // Check current parity and modify the string
+        if (countOnes % 2 == 0) {
+            // Even parity, add 1 to make it odd
+            binaryString += "1";  // Append 1 to the string
+            //System.out.println("Original binary string has Even parity.");
+            System.out.println("It is Odd parity: " + binaryString);
+        } else {
+            // Odd parity, add 1 to make it even
+            binaryString += "1";  // Append 1 to the string
+           // System.out.println("Original binary string has Odd parity.");
+            System.out.println("It is Even parity: " + binaryString);
+        }
+    }
+}

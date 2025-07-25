@@ -1,0 +1,49 @@
+import java.util.Scanner;
+class Node
+{
+	int data;
+	Node link;
+
+}
+class SingalLink1
+{
+	Node header;
+	public void insertF(int x){
+		Node temp=new Node();
+		if(temp==null)
+		{
+			System.out.println("No insertion");
+}
+        else
+		{
+	temp.link=header;
+	temp.data=x;
+	header=temp;
+		}
+	}
+	public void print()
+	{
+		Node ptr=header;
+		while(ptr!=null)
+		{
+			System.out.println(ptr.data+"");
+			ptr=ptr.link;
+		}
+	}
+	
+		
+	public static void main(String args[]){
+		Scanner sc=new Scanner(System.in);
+		
+		SingalLink s=new SingalLink();
+		System.out.println("Enter no of elements");
+		int n=sc.nextInt();
+		for(int i=0;i<n;i++){
+			System.out.println("Enter elements"+" "+(i+1));
+			int m=sc.nextInt();
+			s.insertF(m);
+		}
+		System.out.println("display the elements");
+		s.print();
+	}
+}

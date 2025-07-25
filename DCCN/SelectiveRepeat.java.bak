@@ -1,0 +1,68 @@
+//selective repeat protocol
+import java.util.*;
+
+class SelectiveRepeat {
+    private static final int WINDOW_SIZE = 4; // Size of the sender's window
+    private static final int TOTAL_PACKETS = 10; // Total packets to send
+
+    private boolean[] sentPackets = new boolean[TOTAL_PACKETS];
+    private boolean[] receivedPackets = new boolean[TOTAL_PACKETS];
+    private int[] ackArray = new int[WINDOW_SIZE]; // Array to manage acknowledgments
+    private int ackIndex = 0; // Index to keep track of acknowledgments
+
+    public void sendPackets() {
+        for (int i = 0; i < TOTAL_PACKETS; i++) {
+            if (i < WINDOW_SIZE) {
+                sendPacket(i);
+            }
+        }
+    }
+
+    private void sendPacket(int packetNumber) {
+        System.out.println("Sending packet: " + packetNumber);
+        sentPackets[packetNumber] = true;
+
+        // Simulate random packet loss
+        if (Math.random() > 0.2) { // 80% chance to be received correctly
+            receivePacket(packetNumber);
+        } else {
+            System.out.println("Packet " + packetNumber + " lost.");
+        }
+    }
+
+    private void receivePacket(int packetNumber) {
+        System.out.println("Received packet: " + packetNumber);
+        receivedPackets[packetNumber] = true;
+
+        // Store acknowledgment
+        ackArray[ackIndex % WINDOW_SIZE] = packetNumber;
+        ackIndex++;
+
+        // Process acknowledgments
+        acknowledgePackets();
+    }
+
+    private void acknowledgePackets() {
+        for (int i = 0; i < WINDOW_SIZE; i++) {
+            int ackPacket = ackArray[i];
+            if (ackPacket != 0) {
+                System.out.println("Acknowledgment received for packet: " + ackPacket);
+
+                // Slide the window
+                for (int j = 0; j < WINDOW_SIZE; j++) {
+                    if (ackPacket + j + 1 < TOTAL_PACKETS && !receivedPackets[ackPacket + j + 1]) {
+                        sendPacket(ackPacket + j + 1);
+                    }
+                }
+
+                // Reset acknowledgment
+                ackArray[i] = 0;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        SelectiveRepeat sr = new SelectiveRepeat();
+        sr.sendPackets();
+    }
+}

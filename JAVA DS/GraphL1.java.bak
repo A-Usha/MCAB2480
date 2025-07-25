@@ -1,0 +1,93 @@
+import java.util.Scanner;
+import java.util.LinkedList;
+import java.util.Stack;
+import java.util.Queue;
+class GraphL1
+{
+int V;
+private LinkedList<Integer> arr[];
+GraphL1(int node)
+{
+this.V=node;
+arr=new LinkedList[node];
+for(int a=0;a<V;a++)
+{
+ arr[a]=new LinkedList<Integer>();
+}
+}
+public void insert(int s,int d)
+{
+arr[s].add(d);
+arr[d].add(s);
+}
+public void print()
+{
+for(int i=0;i<V;i++)
+  {
+ System.out.println(arr[i]);
+  }
+}
+public void dfs(int s)
+{
+boolean[] visited=new boolean[V];
+Stack<Integer> s1=new Stack<>();
+s1.push(s);
+while(!s1.isEmpty())
+{
+  int u=s1.pop();
+   if(!visited[u])
+    {
+      visited[u]=true;
+       System.out.println(u+"  ");
+for(int v: arr[u])
+            {
+                if(!visited[v])
+                    {
+                   s1.push(v);
+                     }
+          }
+    }
+ }
+}
+public void bfs(int r)
+{
+boolean[] visited=new boolean[V];
+Queue<Integer>q=new LinkedList<>();
+visited[r]=true;
+q.offer(r);
+while(!q.isEmpty())
+{
+int u1=q.poll();
+System.out.print(u1+"  ");
+for(int v1:arr[u1])
+{
+if(!visited[v1])
+{
+   visited[v1]=true;
+   q.offer(v1);
+}
+}
+}
+}
+public static void main(String[] args)
+{
+Scanner s=new Scanner(System.in);
+System.out.println("enter no vetices");
+int v=s.nextInt();
+GraphL1 g=new GraphL1(v);
+System.out.println("enter no of edges");
+int e=s.nextInt();
+ for(int i=0;i<e;i++)
+ {
+ System.out.println("enter the source");
+ int l=s.nextInt();
+System.out.println("enter the destination");
+ int m=s.nextInt();
+g.insert(l,m);
+}
+//System.out.println("dfs traversal");
+//g.dfs(0);
+//g.print();
+g.bfs(0);
+}
+}

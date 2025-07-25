@@ -1,0 +1,106 @@
+//selective repeat protocol
+import java.util.*;
+
+public class SelectiveRepeatProtocol {
+
+    private static final int WINDOW_SIZE = 4;      // Sliding window size
+    private static final int TIMEOUT = 3000;       // Timeout in milliseconds
+    private static final int TOTAL_PACKETS = 10;   // Total number of packets to send
+
+    private static int seqNum = 0;                 // Sender's sequence number
+    private static boolean[] ackReceived = new boolean[TOTAL_PACKETS]; // Track ACKs
+    private static Timer timer = new Timer();       // Timer for retransmissions
+
+    public static void main(String[] args) {
+        // Start sender and receiver threads
+        new Thread(SelectiveRepeatProtocol::sender).start();
+        new Thread(SelectiveRepeatProtocol::receiver).start();
+    }
+
+    // Sender Logic
+    private static void sender() {
+        for (int i = 0; i < TOTAL_PACKETS; i++) {
+            sendPacket(i);
+        }
+
+        // Wait until all ACKs are received
+        while (!allAcksReceived()) {
+            sleep(500); // Simulate waiting for ACKs
+        }
+
+        System.out.println("Sender: All packets acknowledged.");
+    }
+
+    // Receiver Logic
+    private static void receiver() {
+        // Simulate receiving packets
+        for (int i = 0; i < TOTAL_PACKETS; i++) {
+            receivePacket(i);
+            sleep(1000); // Simulate network delay
+        }
+        System.out.println("Receiver: All packets processed.");
+    }
+
+    // Send a packet
+    private static void sendPacket(int seqNum) {
+        System.out.println("Sender: Sending packet with seqNum " + seqNum);
+
+        // Start the timer for this packet
+        startTimer(seqNum);
+    }
+
+    // Receive a packet (simulated)
+    private static void receivePacket(int seqNum) {
+        System.out.println("Receiver: Received packet with seqNum " + seqNum);
+
+        // Send ACK for the received packet
+        sendAck(seqNum);
+    }
+
+    // Send acknowledgment for the received packet
+    private static void sendAck(int seqNum) {
+        System.out.println("Receiver: Sending ACK for seqNum " + seqNum);
+        ackReceived[seqNum] = true; // Mark ACK as received
+
+        // Cancel timer for the acknowledged packet
+        cancelTimer(seqNum);
+    }
+
+    // Start the timer for retransmission
+    private static void startTimer(int seqNum) {
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                // Resend the packet if ACK has not been received
+                if (!ackReceived[seqNum]) {
+                    System.out.println("Sender: Timeout! Resending packet with seqNum " + seqNum);
+                    sendPacket(seqNum);
+                }
+            }
+        }, TIMEOUT);
+    }
+
+    // Cancel the timer when ACK is received
+    private static void cancelTimer(int seqNum) {
+        timer.cancel(); // Cancel the current timer
+        timer = new Timer(); // Create a new timer for the next timeout
+    }
+
+    // Check if all ACKs are received
+    private static boolean allAcksReceived() {
+        for (boolean ack : ackReceived) {
+            if (!ack) return false;
+        }
+        return true;
+    }
+
+    // Simple sleep method
+    private static void sleep(int milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException e) {
+            // Ignore the exception as per your request
+        }
+    }
+}
+

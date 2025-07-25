@@ -1,0 +1,62 @@
+import java.util.Scanner;
+
+class CharStuffing {
+
+    // Method to check if a character is a special character (non-alphanumeric)
+    public static boolean isSpecialCharacter(char c) {
+        return !Character.isLetterOrDigit(c); // returns true if character is special
+    }
+
+    // Method to perform character stuffing
+    public static String charStuffing(String originalData) {
+        StringBuilder stuffedData = new StringBuilder();
+
+        // Traverse through each character in the original data
+        for (char character : originalData.toCharArray()) {
+            // If the character is a special character, insert another one
+            if (isSpecialCharacter(character)) {
+                stuffedData.append(character);  // Stuff the special character
+                stuffedData.append(character);  // Duplicate the special character
+            } else {
+                stuffedData.append(character);  // Otherwise, just append the character as is
+            }
+        }
+        return stuffedData.toString();
+    }
+
+    // Method to perform character unstuffing
+    public static String charUnstuffing(String stuffedData) {
+        StringBuilder unstuffedData = new StringBuilder();
+        
+        // Traverse through each character in the stuffed data
+        for (int i = 0; i < stuffedData.length(); i++) {
+            char character = stuffedData.charAt(i);
+            
+            // If we encounter a duplicate special character (e.g., '%%'), we keep just one
+            if (isSpecialCharacter(character) && i + 1 < stuffedData.length() && stuffedData.charAt(i + 1) == character) {
+                unstuffedData.append(character);
+                i++;  // Skip the next character because it is a duplicate
+            } else {
+                unstuffedData.append(character);  // Otherwise, just append the character as is
+            }
+        }
+        return unstuffedData.toString();
+    }
+
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter character data:");
+        String originalData = sc.nextLine();
+        System.out.println("Original data: " + originalData);
+        
+        // Perform character stuffing
+        String stuffedData = charStuffing(originalData);
+        System.out.println("Stuffed data: " + stuffedData);
+        
+        // Perform character unstuffing
+        String unstuffedData = charUnstuffing(stuffedData);
+        System.out.println("Unstuffed data: " + unstuffedData);
+        
+        sc.close(); // Close the scanner after use
+    }
+}
