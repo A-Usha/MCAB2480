@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f5f5f5;
+  color: #333;
+  transition: background 0.3s, color 0.3s;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.navbar .logo {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.nav-links li {
+  margin-left: 20px;
+  position: relative;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #0077ff;
+}
+
+/* Dropdown */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 30px;
+  left: 0;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content li {
+  padding: 10px 15px;
+  white-space: nowrap;
+}
+
+.dropdown-content li:hover {
+  background: #f0f0f0;
+}
+
+/* Dark Mode Toggle */
+#darkModeToggle {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 60px 20px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.profile-pic {
+  width: 140px;
+  border-radius: 50%;
+  border: 3px solid #333;
+}
+
+.hero h1 {
+  font-size: 2.2rem;
+  margin: 20px 0 10px;
+}
+
+.hero span {
+  color: #0077ff;
+}
+
+.btn {
+  padding: 10px 20px;
+  background: #0077ff;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  text-decoration: none;
+  margin-top: 20px;
+  display: inline-block;
+}
+
+/* Sections */
+.section {
+  padding: 50px 20px;
+  max-width: 900px;
+  margin: auto;
+}
+
+.section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #0077ff;
+}
+
+.section ul {
+  list-style-type: square;
+  padding-left: 20px;
+}
+
+/* Video Section */
+.video-section {
+  padding: 50px 20px;
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #222;
+  color: #fff;
+  margin-top: 40px;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background: #121212;
+  color: #fff;
+}
+
+body.dark-mode .navbar {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+body.dark-mode .hero {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode a {
+  color: #90caf9;
+}
+
+body.dark-mode .btn {
+  background: #00bcd4;
+}
+
+body.dark-mode .dropdown-content {
+  background: #1e1e1e;
+}
+
+body.dark-mode .dropdown-content li:hover {
+  background: #333;
+}
