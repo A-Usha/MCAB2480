@@ -1,90 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Archakula Usha - Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/yourkit.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
+  <!-- Navbar -->
   <nav class="navbar">
-    <div class="logo">Usha's Portfolio</div>
+    <div class="logo">Usha<span>Portfolio</span></div>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
-      <li class="dropdown">
-        <a href="#">Skills</a>
-        <ul class="dropdown-content">
-          <li><a href="#skills">Programming</a></li>
-          <li><a href="#skills">Tools</a></li>
-        </ul>
-      </li>
-      <li><a href="#projects">Mini Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
       <li><a href="#certifications">Certifications</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <button id="darkModeToggle">🌙</button>
   </nav>
 
+  <!-- Hero Section -->
   <header class="hero">
-    <div class="container">
-      <img src="profile.jpg" alt="Archakula Usha" class="profile-pic"/>
-      <h1>Hello, I'm <span>Archakula Usha</span></h1>
-      <p>MCA Student at Mother Theresa Institute of Computer Applications</p>
-      <a href="resume.pdf" download class="btn">Download Resume</a>
+    <img src="images/usha.jpg" alt="Archakula Usha" class="profile-pic">
+    <h1>Hi, I'm <span>Archakula Usha</span> 👋</h1>
+    <p>MCA Student passionate about coding, problem-solving & building apps.</p>
+    <div class="btn-group">
+      <a href="assets/resume.pdf" download class="btn">📄 Download Resume</a>
+      <a href="#contact" class="btn-outline">✉ Contact Me</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://www.linkedin.com/in/archakula-usha4a-251714326" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/A-Usha" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="mailto:aaushasree@gmail.com"><i class="fas fa-envelope"></i></a>
     </div>
   </header>
 
+  <!-- About -->
   <section id="about" class="section">
     <h2>About Me</h2>
-    <p>I am passionate about software development, problem-solving, and building user-friendly applications.</p>
+    <p>I am Archakula Usha, currently pursuing MCA at Mother Theresa Institute of Computer Applications. 
+       I am passionate about software development, problem-solving, and creating modern, user-friendly applications.</p>
   </section>
 
+  <!-- Skills -->
   <section id="skills" class="section">
     <h2>Skills</h2>
     <ul>
-      <li>Languages: Java, Python, C, JavaScript</li>
-      <li>Web: HTML, CSS, React, Node.js</li>
-      <li>Tools: Git, VS Code, Postman</li>
+      <li>💻 Java, Python, C, JavaScript</li>
+      <li>🌐 HTML, CSS, React, Node.js</li>
+      <li>⚙ Git, VS Code, Postman</li>
     </ul>
   </section>
 
+  <!-- Projects -->
   <section id="projects" class="section">
-    <h2>Mini Projects</h2>
+    <h2>Projects</h2>
     <ul>
-      <li>Student Management System (Java + MySQL)</li>
-      <li>Weather App (JavaScript + API)</li>
-      <li>Portfolio Website</li>
+      <li>🎓 Student Management System (Java + MySQL)</li>
+      <li>☁ Weather App (JavaScript + API)</li>
+      <li>🌐 Portfolio Website</li>
+      <li>📌 Mini Project: 
+        <a href="https://github.com/A-Usha/MCAB2480/tree/main/miniproj" target="_blank">View on GitHub</a>
+      </li>
     </ul>
   </section>
 
+  <!-- Certifications -->
   <section id="certifications" class="section">
     <h2>Certifications</h2>
     <ul>
-      <li>Coursera: Python for Everybody</li>
-      <li>Google Cloud Fundamentals</li>
-      <li>Web Development Bootcamp</li>
+      <li>📜 Coursera: Python for Everybody</li>
+      <li>☁ Google Cloud Fundamentals</li>
+      <li>💡 Web Development Bootcamp</li>
     </ul>
   </section>
 
+  <!-- Contact -->
   <section id="contact" class="section">
     <h2>Contact Me</h2>
-    <p>Email: <a href="mailto:archakulausha@example.com">archakulausha@example.com</a></p>
-    <p>LinkedIn: <a href="#">linkedin.com/in/usha</a></p>
+    <p>📧 Email: <a href="mailto:aaushasree@gmail.com">aaushasree@gmail.com</a></p>
+    <p>🔗 LinkedIn: 
+      <a href="https://www.linkedin.com/in/archakula-usha4a-251714326" target="_blank">
+        linkedin.com/in/archakula-usha4a-251714326
+      </a>
+    </p>
+    <p>💻 GitHub: 
+      <a href="https://github.com/A-Usha" target="_blank">github.com/A-Usha</a>
+    </p>
   </section>
 
-  <section class="video-section">
-    <h2>My Introduction Video</h2>
-    <video controls width="100%">
-      <source src="demo.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  </section>
-
+  <!-- Footer -->
   <footer>
-    <p>&copy; 2025 Archakula Usha. All rights reserved.</p>
+    <p>&copy; 2025 Archakula Usha | Built with ❤️</p>
   </footer>
 
-  <script src="script.js"></script>
 </body>
 </html>
